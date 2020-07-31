@@ -1,0 +1,131 @@
+/*BASIC STUFF*/
+:root {
+    --color-primary: #ff2e63;
+    --shadow: 1px 1px 10px rgba(57, 62, 70, .3);
+    --text-color: #393e46;
+}    
+
+*, 
+*::before, 
+*::after {
+    margin: 0;
+    border: 0;
+    box-sizing: inherit;
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-primary);
+}
+
+
+/*SEARCH BAR AND HEADING*/
+.input {    /*HOLDER*/
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 34.2%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.input__title {
+    margin-top: 2px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid transparent;
+    width: 20%;
+    border-radius: 4px;
+    transition: all .3s;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+}
+
+.input__title:focus {
+    border: 1px solid #eaeaea;
+    width: 80%;
+}
+
+.input__description {
+    resize: none;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: var(--shadow);
+}
+
+.heading-primary {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 80px;
+    user-select: none;
+}
+
+/*BUTTONS*/
+.btn {
+    position: absolute;
+    top: 19.5%;
+    left: 37.2%;
+    width: 70px;
+    height: 36px;
+    text-align: center;
+    border-radius: 8px;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.add__btn {
+    color: var(--color-primary);
+    background-color: white;
+    font-size: xx-large;
+    box-shadow: var(--shadow);
+}
+
+/*YOUR IDEAS*/
+.ideas {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+}
+
+.heading-secondary {
+    color: white;
+    text-transform: uppercase;
+    font-size: 50px;
+    white-space: nowrap;
+    margin-bottom: 12px;
+}
+
+.ideas__list {
+    padding: 0;
+}
+
+.ideas__list > * {
+    margin-bottom: 12px;
+}
+
+.ideas__list--item {
+    color: var(--text-color);
+    list-style: none;
+    text-decoration: none;
+}
+
+.head-divide {
+    background-color: white;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 2px;
+}
+
+.desc-divide {
+    background-color: rgb(241, 241, 241);
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
