@@ -1,4 +1,4 @@
-/*BASIC STUFF*/
+/*```````````````````````````BASIC STUFF```````````````````````````*/
 :root {
     --color-primary: #ff2e63;
     --shadow: 1px 1px 10px rgba(57, 62, 70, .3);
@@ -23,7 +23,7 @@ body {
 }
 
 
-/*SEARCH BAR AND HEADING*/
+/*```````````````````````````SEARCH BAR AND HEADING```````````````````````````*/
 .input {    /*HOLDER*/
     display: flex;
     flex-direction: column;
@@ -66,27 +66,49 @@ body {
     user-select: none;
 }
 
-/*BUTTONS*/
+/*```````````````````````````BUTTONS```````````````````````````*/
 .btn {
+    text-align: center;
+    border-radius: 8px;
+    line-height: 1.2;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+.add__btn {
     position: absolute;
     top: 19.5%;
     left: 37.2%;
     width: 70px;
     height: 36px;
-    text-align: center;
-    border-radius: 8px;
-    line-height: 1.2;
-    cursor: pointer;
-}
-
-.add__btn {
     color: var(--color-primary);
     background-color: white;
     font-size: xx-large;
-    box-shadow: var(--shadow);
+    transition: all .3s;
 }
 
-/*YOUR IDEAS*/
+.add__btn:hover {transform: scale(1.1);}
+.add__btn:active {transform: scale(1);}
+
+.delete__btn {
+    position: absolute;
+    font-weight: 700;
+    top: 67%;
+    left: 7.62%;
+    line-height: 2.85;
+    width: 100px;
+    height: 46px;
+    padding: auto 0;
+    border-radius: 8px;
+    color: var(--color-primary);
+    background-color: white;
+    transition: all .3s;
+}
+
+.delete__btn:hover {transform: scale(1.05);}
+.delete__btn:active {transform: scale(1);}
+
+/*```````````````````````````YOUR IDEAS`````````````````````````*/
 .ideas {
     position: absolute;
     top: 8%;
@@ -110,9 +132,19 @@ body {
 }
 
 .ideas__list--item {
+    position: relative;
     color: var(--text-color);
     list-style: none;
     text-decoration: none;
+}
+
+.remove__item {
+    position: absolute;
+    top: 15%; left: 93%;
+    font-weight: 700;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: inline-block;
 }
 
 .head-divide {

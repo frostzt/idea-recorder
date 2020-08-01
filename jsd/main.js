@@ -6,7 +6,8 @@ const appController = (function(){
         title: document.getElementById('idea_topic'),
         desc: document.getElementById('description'),
         addBtn: document.getElementById('addBtn'),
-        ideaList: document.querySelector('.ideas__list')
+        ideaList: document.querySelector('.ideas__list'),
+        delAllBtn: document.getElementById('delAllBtn')
     };
 
     // Idea contructor
@@ -19,15 +20,24 @@ const appController = (function(){
     }
 
     // Recieve the data from UI, change it to object, and pass it into -> data array
-    let pushData = function(title, desc) {
+    const pushData = function(title, desc) {
         let tempObj = new Idea();
         tempObj.topic = title;
         tempObj.desc = desc;
         tempObj.id = data.length;
-        if (tempObj.desc == "") {
+        if (tempObj.desc == "" || tempObj.desc.trim() == "") {
             tempObj.desc = "Umm, I think it's a Super Secret Description...";
         }
         data.push(tempObj);        
+    };
+
+    // Remove the item from the data structure
+    const removeItem = function(ID) {
+        for (let cur = 0; cur < data.length; cur++) {
+            if (data[cur].id == ID) {
+                
+            }
+        }
     };
 
     // Data storage
@@ -37,13 +47,27 @@ const appController = (function(){
         test: function() {
             return data;
         },
-        elements: elements,
+
+        getElements: function() {
+            return elements;
+        },
+
         storeData: function(title, desc) {
             // 1. Call the pushData function  
             pushData(title, desc);
         },
+
         getData: function() {
             return data;
+        },
+
+        emptyData: function() {
+            data = [];
+            UIController.flushUI();
+        },
+
+        removeIdea: function(id) {
+            removeItem(id);
         }
     }
 
@@ -51,7 +75,7 @@ const appController = (function(){
 
 // UI Controller
 const UIController = (function() {
-    const elements = appController.elements;    // Import elements from appController
+    const elements = appController.getElements();    // Import elements from appController
 
     // Render data to the UI
     const renderUI = function(arr) {
@@ -71,6 +95,7 @@ const UIController = (function() {
             <li class="ideas__list--item" id="idea-${id}">
                 <h3 class="heading-tertiary head-divide">${topic}</h3>
                 <div class="desc desc-divide">${desc}</div>
+                <div class="remove__item" id="remove-${id}">X</div>
             </li>
         `;
 
@@ -81,26 +106,33 @@ const UIController = (function() {
         renderData: function() {
             let data = appController.getData();
             renderUI(data);
-        }        
+        },
+        
+        flushUI: function() {
+            elements.ideaList.innerHTML = "";
+        }
     }   
 
 })();
 
 // Main Controller
 const controller = (function(appCtrl, UICtrl) {
-    const elements = appController.elements;    // Import elements from appController
+    const elements = appController.getElements();    // Import elements from appController
 
     // If pressed enter addIdea will be called
-    window.addEventListener('click', e => {
-        
+    window.addEventListener('keyup', e => {
+        if (e.keyCode == 13 || e.which == 13) {
+            elements.addBtn.click();
+        }
     });
 
     // Add idea to the data set
-    let addIdea = function() {
+    const addIdea = function() {
         let title, desc;
         title = elements.title.value;
         desc = elements.desc.value;
 
+        // Is title empty?
         if (title == "") {
             alert("Title can't be empty...")
         } else {
@@ -116,7 +148,33 @@ const controller = (function(appCtrl, UICtrl) {
         }
     };  
 
+    // Delete the selected idea
+    const delIdea = function(e) {
+        let itemID, splitID, ID;
+        itemID = e.target.id;
+        
+        if(itemID) {
+            splitID = itemID.split('-');
+            ID = parseInt(splitID[1]);   
+        }
+
+        // 1. Remove the item from the Data Structure
+        appCtrl.removeIdea(ID);
+
+        // 2. Remove the item from the UI
+
+
+    };
+
+    // Delete all ideas
+    const delAllIdea = function() {
+        // Delete everything from data array
+        appCtrl.emptyData();
+    };
+
     // Setup event listeners
     elements.addBtn.addEventListener('click', addIdea);
+    elements.delAllBtn.addEventListener('click', delAllIdea);
+    elements.ideaList.addEventListener('click', delIdea);
 })(appController, UIController);
 
