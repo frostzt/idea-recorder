@@ -33,11 +33,17 @@ const appController = (function(){
 
     // Remove the item from the data structure
     const removeItem = function(ID) {
-        for (let cur = 0; cur < data.length; cur++) {
-            if (data[cur].id == ID) {
-                
+        let index;
+
+        for (let cur = 0; cur < data.length; cur++) {            
+            if (data[cur].id === ID) {
+                index = data[cur].id;
+                console.log(index);
+                break;
             }
         }
+
+        data.splice(index, 1);
     };
 
     // Data storage
@@ -177,4 +183,3 @@ const controller = (function(appCtrl, UICtrl) {
     elements.delAllBtn.addEventListener('click', delAllIdea);
     elements.ideaList.addEventListener('click', delIdea);
 })(appController, UIController);
-
