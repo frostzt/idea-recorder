@@ -33,14 +33,18 @@ const appController = (function(){
 
     // Remove the item from the data structure
     const removeItem = function(ID) {
-        let index;
+        let index, delId;
         
         // Find the index of the element using the ID
-        const isTheItem = (el) => el.id === ID;
+        const isTheItem = el => el.id === ID;
         index = data.findIndex(isTheItem);
+        delId = data[index].id;
 
         // Remove the element
         data.splice(index, 1);
+
+        // Update UI
+        UIController.delElem(delId);
     };
 
     // Data storage
@@ -99,8 +103,7 @@ const UIController = (function() {
                 <h3 class="heading-tertiary head-divide">${topic}</h3>
                 <div class="desc desc-divide">${desc}</div>
                 <div class="remove__item" id="remove-${id}">X</div>
-            </li>
-        `;
+            </li>`;
 
         elements.ideaList.insertAdjacentHTML('afterbegin', markup);
     };
@@ -113,6 +116,12 @@ const UIController = (function() {
         
         flushUI: function() {
             elements.ideaList.innerHTML = "";
+        },
+
+        delElem: function(delId) {
+            // Removes the element from the UI
+            let removeEl = document.getElementById(`idea-${delId}`);
+            removeEl.parentNode.removeChild(removeEl);
         }
     }   
 
