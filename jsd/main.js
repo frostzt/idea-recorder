@@ -34,15 +34,12 @@ const appController = (function(){
     // Remove the item from the data structure
     const removeItem = function(ID) {
         let index;
+        
+        // Find the index of the element using the ID
+        const isTheItem = (el) => el.id === ID;
+        index = data.findIndex(isTheItem);
 
-        for (let cur = 0; cur < data.length; cur++) {            
-            if (data[cur].id === ID) {
-                index = data[cur].id;
-                console.log(index);
-                break;
-            }
-        }
-
+        // Remove the element
         data.splice(index, 1);
     };
 
