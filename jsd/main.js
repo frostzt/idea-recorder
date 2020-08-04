@@ -87,13 +87,26 @@ const UIController = (function() {
     // Format topic for UI
     const formatTopic = (topic) => {
         let newTopic, topicArr;
-        topicArr = topic.split(' ');
-        if(topicArr.length > 6) {
-            topicArr.splice(6);
-            newTopic = topicArr.join(" ") + "...";
-            return newTopic;
+        topicArr = topic.split('');
+        if(topicArr.length > 27) {
+          topicArr.splice(27);
+          newTopic = topicArr.join("") + "...";
+          return newTopic;
         }
         return topic;
+    };
+
+
+    // Format description for UI
+    const formatDescription = (desc) => {
+        let newDesc, descArr;
+        descArr = desc.split('');
+        if(descArr.length > 60) {
+            descArr.splice(60);
+            newDesc = descArr.join("") + "...";
+            return newDesc;
+        }
+        return desc;
     };
 
     // Render data to the UI
@@ -104,7 +117,7 @@ const UIController = (function() {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i].id + 2 > arr.length) {
                 id = arr[i].id;
-                desc = arr[i].desc;
+                desc = formatDescription(arr[i].desc);
                 topic = formatTopic(arr[i].topic);
             }
         }
@@ -174,20 +187,19 @@ const controller = (function(appCtrl, UICtrl) {
 
     // Delete the selected idea
     const delIdea = function(e) {
-        let itemID, splitID, ID;
-        itemID = e.target.id;
-        
-        if(itemID) {
-            splitID = itemID.split('-');
-            ID = parseInt(splitID[1]);   
+        // Delete only if the remove button was clicked
+        if(e.target.classList == 'remove__item') {
+            let itemID, splitID, ID;
+            itemID = e.target.id;
+            
+            if(itemID) {
+                splitID = itemID.split('-');
+                ID = parseInt(splitID[1]);   
+            }
+    
+            // Remove the item from the Data Structure
+            appCtrl.removeIdea(ID);
         }
-
-        // 1. Remove the item from the Data Structure
-        appCtrl.removeIdea(ID);
-
-        // 2. Remove the item from the UI
-
-
     };
 
     // Delete all ideas
