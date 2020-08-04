@@ -84,6 +84,18 @@ const appController = (function(){
 const UIController = (function() {
     const elements = appController.getElements();    // Import elements from appController
 
+    // Format topic for UI
+    const formatTopic = (topic) => {
+        let newTopic, topicArr;
+        topicArr = topic.split(' ');
+        if(topicArr.length > 6) {
+            topicArr.splice(6);
+            newTopic = topicArr.join(" ") + "...";
+            return newTopic;
+        }
+        return topic;
+    };
+
     // Render data to the UI
     const renderUI = function(arr) {
         let markup, desc, topic, id;
@@ -93,7 +105,7 @@ const UIController = (function() {
             if (arr[i].id + 2 > arr.length) {
                 id = arr[i].id;
                 desc = arr[i].desc;
-                topic = arr[i].topic;
+                topic = formatTopic(arr[i].topic);
             }
         }
 
