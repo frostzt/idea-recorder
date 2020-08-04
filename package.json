@@ -4,15 +4,12 @@
   "description": "A project to practice JS",
   "main": "index.js",
   "scripts": {
-    "transpile": "babel jsd -d js",
-    "browserify": "browserify js/main.js -o js/bundle.js",
-    "build": "npm run transpile && npm run browserify"
+    "transpile": "babel jsd -d js"
   },
   "author": "Sourav",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "uniqid": "^5.2.0"
+    "babel-preset-env": "^1.7.0"
   }
 }
